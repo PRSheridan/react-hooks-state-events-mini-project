@@ -1,7 +1,7 @@
 import React from "react";
 import Task from "./Task"
 
-function TaskList( {tasks} ) {
+function TaskList( {tasks, category} ) {
   function handleDeleteTask(event) {
     event.preventDefault()
     event.target.parentNode.remove();
@@ -9,16 +9,16 @@ function TaskList( {tasks} ) {
 
   return (
     <div className="tasks">
-      {tasks.map((task) => {
-        return (
-          <Task 
-            key={task.text}
-            category={task.category} 
-            text={task.text}
-            deleteTask={handleDeleteTask}
-          />
-        )
-      })} 
+      {[...tasks].map((task) => {
+          return (
+            <Task 
+              key={task.text}
+              category={task.category} 
+              text={task.text}
+              deleteTask={handleDeleteTask}
+            />
+          )
+        })}
     </div>
   );
 }

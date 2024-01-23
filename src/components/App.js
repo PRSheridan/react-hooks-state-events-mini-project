@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import CategoryFilter from "./CategoryFilter";
 import NewTaskForm from "./NewTaskForm";
 import TaskList from "./TaskList";
@@ -8,8 +8,11 @@ console.log("Here's the data you're working with");
 console.log({ CATEGORIES, TASKS });
 
 function App() {
+  const [category, setCategory] = useState("All")
+
   function handleSelectCategory(event) {
     [...event.target.parentNode.children].forEach(button => button.classList.remove("selected"));
+      setCategory(event.target.textContent);
       event.target.className = "selected"
   }
 
@@ -18,7 +21,7 @@ function App() {
       <h2>My tasks</h2>
       <CategoryFilter categories={CATEGORIES} selectCategory={handleSelectCategory}/>
       <NewTaskForm />
-      <TaskList tasks={TASKS}/>
+      <TaskList tasks={TASKS} category={category}/>
     </div>
   );
 }
