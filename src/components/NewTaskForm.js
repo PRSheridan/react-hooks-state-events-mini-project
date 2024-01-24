@@ -1,6 +1,10 @@
 import React from "react";
 
-function NewTaskForm() {
+function NewTaskForm( {categories, onTaskFormSubmit} ) {
+
+  const [textInput, setTextInput] = useState("")
+  //create category state
+  //create handle functions to make each variable controlled inputs
   return (
     <form className="new-task-form">
       <label>
@@ -10,10 +14,14 @@ function NewTaskForm() {
       <label>
         Category
         <select name="category">
-          {/* render <option> elements for each category here */}
+          {categories.map((category) => {
+            return (
+              <option key={category}>{category}</option>
+            )
+          })}
         </select>
       </label>
-      <input type="submit" value="Add task" />
+      <input type="submit" onSubmit={onTaskFormSubmit} value="Add task" />
     </form>
   );
 }
