@@ -2,6 +2,10 @@ import React from "react";
 import Task from "./Task"
 
 function TaskList( {tasks, category} ) {
+
+  const tasksToDisplay = tasks
+  .filter((task) => category === "All" || task.category === category)
+
   function handleDeleteTask(event) {
     event.preventDefault()
     event.target.parentNode.remove();
@@ -9,7 +13,8 @@ function TaskList( {tasks, category} ) {
 
   return (
     <div className="tasks">
-      {[...tasks].map((task) => {
+      {tasksToDisplay
+      .map((task) => {
           return (
             <Task 
               key={task.text}
