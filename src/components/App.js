@@ -9,24 +9,23 @@ function App() {
   const [category, setCategory] = useState("All")
 
   function handleSelectCategory(event) {
+    event.preventDefault();
     [...event.target.parentNode.children].forEach(button => button.classList.remove("selected"));
       setCategory(event.target.textContent);
       event.target.className = "selected"
   }
 
-  function handleTaskFormSubmit(event) {
-    event.preventDefault()
-    setTasks([...tasks],   {
-      text: "temp",
-      category: "temp",
-    })
+  function handleTaskFormSubmit( {newTask} ) {
+    setTasks([...tasks], newTask)
   }
 
   return (
     <div className="App">
       <h2>My tasks</h2>
       <CategoryFilter categories={CATEGORIES} selectCategory={handleSelectCategory}/>
-      <NewTaskForm categories={CATEGORIES} onTaskFormSubmit={handleTaskFormSubmit}/>
+      <NewTaskForm 
+        categories={CATEGORIES} 
+        onTaskFormSubmit={handleTaskFormSubmit}/>
       <TaskList tasks={tasks} setTasks={setTasks} category={category}/>
     </div>
   );

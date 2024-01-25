@@ -10,7 +10,7 @@ function TaskList( {tasks, setTasks, category} ) {
     event.preventDefault()
     //absolutely the wrong way to do this but holy crap it worked.
     const tempTasks = [...event.target.parentNode.children][1].textContent
-    setTasks(tasks = [...tasks].filter((task) => tempTasks != task.text))
+    setTasks(tasks = [...tasks].filter((task) => tempTasks !== task.text))
   }
 //tasks are not rendered at once... because I am filtering them here
 //potentially handle in function?
