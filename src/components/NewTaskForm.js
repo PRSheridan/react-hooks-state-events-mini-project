@@ -17,8 +17,13 @@ function NewTaskForm( {categories, onTaskFormSubmit} ) {
     setNewTask({"category": categoryInput, "text": textInput})
   }
 
+  function handleTaskFormSubmit(event) {
+    event.preventDefault()
+    onTaskFormSubmit(newTask)
+  }
+
   return (
-    <form className="new-task-form">
+    <form className="new-task-form" onSubmit={handleTaskFormSubmit}>
       <label>
         Details
         <input type="text" name="text" onChange={handleTextChange} />
@@ -33,7 +38,7 @@ function NewTaskForm( {categories, onTaskFormSubmit} ) {
           })}
         </select>
       </label>
-      <input type="submit" onSubmit={() => {onTaskFormSubmit(newTask)}} value="Add task" />
+      <input type="submit" value="Add task" />
     </form>
   );
 }
