@@ -1,30 +1,22 @@
 import React, {useState} from "react";
 
 function NewTaskForm( {categories, onTaskFormSubmit} ) {
-
   const [textInput, setTextInput] = useState("")
   const [categoryInput, setCategoryInput] = useState("Code")
+  const [newTask, setNewTask] = useState({})
 
   function handleTextChange(event) {
     event.preventDefault();
     setTextInput(event.target.value);
+    setNewTask({"category": categoryInput, "text": textInput})
   }
 
   function handleCategoryChange(event) {
     event.preventDefault();
     setCategoryInput(event.target.value)
+    setNewTask({"category": categoryInput, "text": textInput})
   }
 
-  function handleTaskFormChange(event) {
-    event.preventDefault()
-    const newTask = {"category": categoryInput, "text": textInput}
-    onTaskFormSubmit(newTask)
-    setTextInput("")
-    setCategoryInput("Code")
-  }
-
-  //create category state
-  //create handle functions to make each variable controlled inputs
   return (
     <form className="new-task-form">
       <label>
@@ -41,9 +33,11 @@ function NewTaskForm( {categories, onTaskFormSubmit} ) {
           })}
         </select>
       </label>
-      <input type="submit" onSubmit={handleTaskFormChange} value="Add task" />
+      <input type="submit" onSubmit={() => {onTaskFormSubmit(newTask)}} value="Add task" />
     </form>
   );
 }
+
+//took me forever. onSubmit > onTaskFormSubmit(newTask) > App > handleTaskFormSubmit(newTask) > setTasks[...tasks, newTask]
 
 export default NewTaskForm;

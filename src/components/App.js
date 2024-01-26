@@ -5,7 +5,7 @@ import TaskList from "./TaskList";
 import { CATEGORIES, TASKS } from "../data";
 
 function App() {
-  const [tasks, setTasks] = useState([...TASKS])
+  const [tasks, setTasks] = useState(TASKS)
   const [category, setCategory] = useState("All")
 
   function handleSelectCategory(event) {
@@ -15,17 +15,15 @@ function App() {
       event.target.className = "selected"
   }
 
-  function handleTaskFormSubmit( {newTask} ) {
-    setTasks([...tasks], newTask)
+  function handleTaskFormSubmit(newTask) {
+    setTasks([...tasks, newTask])
   }
 
   return (
     <div className="App">
       <h2>My tasks</h2>
       <CategoryFilter categories={CATEGORIES} selectCategory={handleSelectCategory}/>
-      <NewTaskForm 
-        categories={CATEGORIES} 
-        onTaskFormSubmit={handleTaskFormSubmit}/>
+      <NewTaskForm categories={CATEGORIES} onTaskFormSubmit={handleTaskFormSubmit}/>
       <TaskList tasks={tasks} setTasks={setTasks} category={category}/>
     </div>
   );
