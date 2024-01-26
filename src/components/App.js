@@ -11,8 +11,8 @@ function App() {
   function handleSelectCategory(event) {
     event.preventDefault();
     [...event.target.parentNode.children].forEach(button => button.classList.remove("selected"));
-      setCategory(event.target.textContent);
       event.target.className = "selected"
+      setCategory(event.target.textContent);
   }
 
   function handleTaskFormSubmit(newTask) {

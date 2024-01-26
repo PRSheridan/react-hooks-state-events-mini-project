@@ -3,34 +3,23 @@ import React, {useState} from "react";
 function NewTaskForm( {categories, onTaskFormSubmit} ) {
   const [textInput, setTextInput] = useState("")
   const [categoryInput, setCategoryInput] = useState("Code")
-  const [newTask, setNewTask] = useState({})
-
-  function handleTextChange(event) {
-    event.preventDefault();
-    setTextInput(event.target.value);
-    setNewTask({"category": categoryInput, "text": textInput})
-  }
-
-  function handleCategoryChange(event) {
-    event.preventDefault();
-    setCategoryInput(event.target.value)
-    setNewTask({"category": categoryInput, "text": textInput})
-  }
+  let newTask = {}
 
   function handleTaskFormSubmit(event) {
     event.preventDefault()
+    newTask = {"category": categoryInput, "text": textInput}
     onTaskFormSubmit(newTask)
   }
 
   return (
-    <form className="new-task-form" onSubmit={handleTaskFormSubmit}>
+    <form className="new-task-form" onSubmit={(handleTaskFormSubmit)}>
       <label>
         Details
-        <input type="text" name="text" onChange={handleTextChange} />
+        <input type="text" name="text" onChange={(event) => setTextInput(event.target.value)} />
       </label>
       <label>
         Category
-        <select name="category" onChange={handleCategoryChange}>
+        <select name="category" onChange={(event) => setCategoryInput(event.target.value)}>
           {categories.map((category) => {
             return (
               <option key={category}>{category}</option>
